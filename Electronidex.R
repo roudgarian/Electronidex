@@ -28,24 +28,13 @@ plot(rules )
 plot(rules, method="graph")
 plot(rules, method="paracoord", control=list(reorder=TRUE)[1:10])
 plot(sort(rules, by='confidence', decreasing = TRUE)[1:10], method="grouped")
-# itemLabels(tdata)
-# itemLabels(tdata)<- X1
-#length (tdata)
-#size(head(tdata))
-#LIST(head(tdata))
+
 frequentItems<-eclat (tdata, parameter=list(supp=0.1))
 inspect(head(frequentItems))
 
-
-rules<-apriori(tdata, parameter=list(supp=0.002, conf=0.8))
-rules_conf<- sort (rules, by="confidence", decreasing=TRUE) 
-
-inspect(head(rules_conf))
-summary(rules_conf)
-inspect(rules_conf)
 #The rules with confidence of 0.95 (see rules_conf above) imply that, whenever the LHS item was 
 #purchased, the RHS item was also purchased 95% of the time.
-rules_lift<-sort (rules, by="lift", decreasing=TRUE)
+rules_lift<-sort (rules, by="lift", decreasing=TRUE) Hello
 inspect(head(rules_lift))
 inspect(rules_lift)
 #A rule with a lift of 6 (see rules_lift below) imply that, the items in LHS and RHS are 
