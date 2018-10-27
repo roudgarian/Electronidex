@@ -13,7 +13,7 @@ library(arules)
 library(arulesViz)
 registerDoMC(cores=4)
 setwd("C:/R/Cours02/Task04")
-tdata <- read.transactions("ElectronidexTransactions2017.txt",
+tdata <- read.transactions("ElectronidexTransactions201701.txt",
                            format<-c("basket"),rm.duplicates=TRUE)
 tdata<-tdata[which(size(tdata)!= 0)]
 summary(tdata)
@@ -23,7 +23,7 @@ data[(size(tdata) >3)]
 inspect(head(data[size(tdata) >3]))
 summary(size(tdata))
 
-itemFrequencyPlot(tdata, topN=10, type="absolute", main="Item Frequency")
+itemFrequencyPlot(tdata, topN=17, type="absolute", main="Item Frequency")
 rules <- apriori(tdata, parameter = list(supp=0.002, conf=0.7))
 rules <- sort(rules, by='confidence', decreasing = TRUE)
 
@@ -49,4 +49,12 @@ inspect(rules_subset)
 data[(size(rules_subset))]
 summary(size(rules_subset))
 
+Company<- c("Blackwell","Blackwell","Electronidex","Electronidex")
+Volume<-c(1578,4249,5704,5252)
+products<-c("Desktop","Laptop","Desktop","Laptop")
+Mat<-data.frame(Company,Desktops,Laptops)
+str(Mat)
+
+ggplot (Mat, aes(x=products, y=Volume, fill=Company)) + 
+  geom_bar (stat="identity", position = position_dodge(width = 0.5))
 
