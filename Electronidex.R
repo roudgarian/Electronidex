@@ -13,7 +13,7 @@ library(arules)
 library(arulesViz)
 registerDoMC(cores=4)
 setwd("C:/R/Cours02/Task04")
-tdata <- read.transactions("ElectronidexTransactions201701.txt",
+tdata <- read.transactions("ElectronidexTransactions2017.txt",
                            format<-c("basket"),rm.duplicates=TRUE)
 tdata<-tdata[which(size(tdata)!= 0)]
 summary(tdata)
@@ -35,8 +35,6 @@ inspect(head(rules))
 frequentItems<-eclat (tdata, parameter=list(supp=0.1))
 inspect(head(frequentItems))
 
-
-plot(rules )
 plot(rules[1:6], method="graph", engine = 'htmlwidget')
 plot(rules[1:15], method="paracoord", control=list(reorder=TRUE))
 plot(sort(rules[1:10], by='confidence', decreasing = TRUE), method="grouped")
@@ -55,6 +53,8 @@ products<-c("Desktop","Laptop","Desktop","Laptop")
 Mat<-data.frame(Company,Desktops,Laptops)
 str(Mat)
 
-ggplot (Mat, aes(x=products, y=Volume, fill=Company)) + 
-  geom_bar (stat="identity", position = position_dodge(width = 0.5))
+ggplot (Mat, aes(x=products, y=Volume, fill=Company,)) + 
+  geom_bar (stat="identity", position = position_dodge(width = 0.5),
+            color="black")+scale_fill_brewer(palette="Paired")+
+  theme_minimal()
 
